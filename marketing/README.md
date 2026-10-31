@@ -1,13 +1,14 @@
 # $OILHOOD launch posts
 
-Motion posts for X / Instagram / Telegram, 1080×1350 (4:5) MP4s.
-Posts 2 and 3 are silent for now; the teaser has sound-designed music and a voiceover.
+Motion posts for X / Instagram / Telegram, 1080×1350 (4:5) MP4s with original, sound-designed music.
 
 | # | File | Length | When to post |
 |---|------|--------|--------------|
-| 1 | `videos/01-teaser-voice-female.mp4` (or `-voice-male`, `-music`, silent `01-teaser.mp4`) | 10s | **First post.** Nothing exists yet, so just plant the name. |
-| 2 | `videos/02-building.mp4` | 14.5s | A few hours later: what we're actually building. |
-| 3 | `videos/03-live.mp4` | 10.5s | When you announce the website. |
+| 1 | `videos/01-teaser-music.mp4` | 10s | **First post.** Nothing exists yet, so just plant the name. |
+| 2 | `videos/02-building-music.mp4` | 14.5s | A few hours later: what we're actually building. |
+| 3 | `videos/03-live-music.mp4` | 10.5s | When you announce the website. |
+
+The `-music` versions are the chosen style. Voiceover versions of the teaser (`01-teaser-voice-female/male.mp4`) and silent originals are kept as alternatives.
 
 `covers/` has a still frame of each one, for a thumbnail or a static post.
 
@@ -106,7 +107,15 @@ node render.js 03-live 10.5        # render the MP4 to videos/
 
 Requires Node, Playwright (Chromium) and ffmpeg. To change the URL in post 3 (e.g. a custom domain), edit `URL_TEXT` in `src/03-live.html` and re-render.
 
-## Audio (teaser)
+## Audio
+
+- `audio/synth.py` – shared synth toolkit (pads, groove, plucks, whooshes, riser, boom, oil pour).
+- `audio/score_02_building.py`, `audio/score_03_live.py` – scores for posts 2 and 3, cue times match the HTML animations:
+  ```bash
+  python audio/score_02_building.py audio/building-music.wav
+  ffmpeg -i videos/02-building.mp4 -i audio/building-music.wav -map 0:v -map 1:a -c:v copy \
+    -af loudnorm=I=-14:TP=-1.5 -c:a aac -b:a 192k -shortest videos/02-building-music.mp4
+  ```
 
 - `audio/mix.py` – original music + sound design synced to the teaser (drop whoosh, plop, typing ticks, riser, boom on the reveal, warm groove), with voice ducking. Everything is generated in code, so there are no licensing issues.
 - Voiceover: "Something is being drilled… on Robinhood Chain. OilHood. The oil of the people. Coming soon."
