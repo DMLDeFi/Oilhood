@@ -16,6 +16,16 @@ export function ConnectButton({ className = "" }: { className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (isConnected || typeof window === "undefined") return;
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("connect") !== "1" || !(window as { ethereum?: unknown }).ethereum) return;
+    url.searchParams.delete("connect");
+    window.history.replaceState(null, "", url.toString());
+    const injectedConnector = connectors.find((c) => c.id === "injected") ?? connectors.find((c) => c.type === "injected");
+    if (injectedConnector) connect({ connector: injectedConnector, chainId: robinhood.id });
+  }, [isConnected, connectors, connect]);
+
+  useEffect(() => {
     const close = (e: MouseEvent) => ref.current && !ref.current.contains(e.target as Node) && setOpen(false);
     document.addEventListener("mousedown", close);
     return () => document.removeEventListener("mousedown", close);
@@ -66,7 +76,7 @@ export function ConnectButton({ className = "" }: { className?: string }) {
             </>
           ) : (
             <>
-              <p className="px-3 py-2 label">Choose wallet</p>
+              {list.length > 0 && <p className="px-3 py-2 label">Choose wallet</p>}
               {list.map((c) => (
                 <button
                   key={c.uid}
@@ -77,7 +87,7 @@ export function ConnectButton({ className = "" }: { className?: string }) {
                     // eslint-disable-next-line @next/next/no-img-element -- wallet icons are data URIs
                     <img src={c.icon} alt="" className="h-5 w-5 rounded" />
                   ) : <span className="grid h-5 w-5 place-items-center text-base">{FALLBACK_ICON[c.id] ?? "👛"}</span>}
-                  {c.id === "injected" ? "Browser wallet" : c.name}
+                  {c.id === "injected" ? "Browser wallet" : c.id === "walletConnect" ? "WalletConnect (any wallet app)" : c.name}
                 </button>
               ))}
               {error && <p className="px-3 py-2 text-xs text-down">{friendlyError(error.message)}</p>}
@@ -91,26 +101,31 @@ export function ConnectButton({ className = "" }: { className?: string }) {
   );
 }
 
-const FALLBACK_ICON: Record<string, string> = { metaMaskSDK: "🦊", coinbaseWalletSDK: "🔵", walletConnect: "🔗" };
+const FALLBACK_ICON: Record<string, string> = { walletConnect: "🔗" };
 
 function friendlyError(message: string) {
-  if (/provider not found|no provider/i.test(message)) return "No wallet found in this browser. Open this page in your wallet app instead (below).";
+  if (/provider not found|no provider/i.test(message)) return "No wallet in this browser. Tap your wallet below to open OilHood inside it.";
   if (/rejected|denied/i.test(message)) return "Request cancelled in your wallet.";
   return message.split("\n")[0];
 }
 
 /** Phone browsers have no wallet: deep-link into the wallet apps' built-in browsers instead. */
 function OpenInWallet() {
-  const here = typeof window !== "undefined" ? window.location.href : "";
+  const here = (() => {
+    if (typeof window === "undefined") return "";
+    const u = new URL(window.location.href);
+    u.searchParams.set("connect", "1");
+    return u.toString();
+  })();
   const bare = here.replace(/^https?:\/\//, "");
   const links = [
-    { name: "MetaMask app", href: `https://metamask.app.link/dapp/${bare}` },
-    { name: "Trust Wallet app", href: `https://link.trustwallet.com/open_url?coin_id=60&url=${encodeURIComponent(here)}` },
-    { name: "Coinbase Wallet app", href: `https://go.cb-w.com/dapp?cb_url=${encodeURIComponent(here)}` },
+    { name: "🦊 MetaMask", href: `https://metamask.app.link/dapp/${bare}` },
+    { name: "🛡 Trust Wallet", href: `https://link.trustwallet.com/open_url?coin_id=60&url=${encodeURIComponent(here)}` },
+    { name: "🔵 Coinbase Wallet", href: `https://go.cb-w.com/dapp?cb_url=${encodeURIComponent(here)}` },
   ];
   return (
     <div className="mt-1 border-t border-pipe pt-2">
-      <p className="px-3 py-1 label !text-[10px]">Or open this site inside</p>
+      <p className="px-3 py-1 label !text-[10px]">On a phone? Open in your wallet app</p>
       {links.map((l) => (
         <a key={l.name} href={l.href} className="block rounded-lg px-3 py-2 text-sm hover:bg-rig">
           {l.name} ↗
@@ -120,7 +135,7 @@ function OpenInWallet() {
         className="w-full rounded-lg px-3 py-2 text-left text-sm text-smoke hover:bg-rig"
         onClick={() => navigator.clipboard?.writeText(here).catch(() => {})}
       >
-        Copy link for another wallet&apos;s browser
+        📋 Copy link (paste in any wallet&apos;s browser)
       </button>
     </div>
   );
