@@ -1,0 +1,120 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+  .intro { position: absolute; left: 80px; right: 80px; top: 400px; animation: fadeOutUp .5s ease-in 3.4s both; }
+  .intro h1 { font-size: 110px; line-height: 1.02; letter-spacing: -.035em; font-weight: 700; }
+  .intro h1 .l { display: block; animation: fadeUp .8s cubic-bezier(.2,.7,.2,1) both; }
+  .strike { position: relative; display: inline-block; }
+  .strike::after { content: ""; position: absolute; left: -6px; right: -6px; top: 54%; height: 10px; background: var(--amber); transform-origin: left; animation: strike .45s ease-out 1.3s both; }
+  @keyframes strike { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+  .term { position: absolute; left: 60px; right: 60px; top: 110px; padding: 44px; animation: slideIn .8s cubic-bezier(.2,.7,.2,1) 3.7s both; }
+  @keyframes slideIn { from { opacity: 0; transform: translateY(120px) scale(.96); } to { opacity: 1; transform: none; } }
+  .term-head { display: flex; justify-content: space-between; align-items: center; }
+  .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--up); display: inline-block; margin-right: 14px; box-shadow: 0 0 0 0 rgb(61 220 151 / .6); animation: pulse 1.4s ease-out 4s 7 both; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgb(61 220 151 / .6); } 100% { box-shadow: 0 0 0 18px rgb(61 220 151 / 0); } }
+  .price { font-family: "JetBrains Mono", monospace; font-size: 120px; font-weight: 700; letter-spacing: -.03em; margin-top: 18px; }
+  .chg { font-family: "JetBrains Mono", monospace; font-size: 30px; color: var(--up); }
+  .chart { width: 100%; height: 190px; margin-top: 14px; }
+  .chart path.line { stroke-dasharray: 2000; animation: draw 2.2s ease-out 4.1s both; }
+  .chart path.fill { animation: fadeIn 1s ease 5.6s both; }
+  @keyframes draw { from { stroke-dashoffset: 2000; } to { stroke-dashoffset: 0; } }
+
+  .feats { position: absolute; left: 60px; right: 60px; top: 650px; display: grid; grid-template-columns: 1fr 300px; gap: 24px; }
+  .list { display: flex; flex-direction: column; gap: 14px; }
+  .feat { display: flex; align-items: center; gap: 22px; padding: 22px 28px; border-radius: 26px; border: 1.5px solid var(--pipe); background: var(--well); font-size: 33px; font-weight: 600; animation: featIn .6s cubic-bezier(.2,.7,.2,1) both; }
+  .feat .ic { width: 58px; height: 58px; border-radius: 16px; display: grid; place-items: center; background: rgb(245 184 61 / .12); color: var(--gold); font-size: 30px; flex: none; }
+  .feat small { display: block; font-size: 22px; font-weight: 400; color: var(--smoke); margin-top: 4px; }
+  @keyframes featIn { from { opacity: 0; transform: translateX(-60px); } to { opacity: 1; transform: none; } }
+  .barrel { border-radius: 26px; border: 1.5px solid var(--pipe); background: var(--well); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; animation: fadeIn .6s ease 7.6s both; }
+  .bb { font-family: "JetBrains Mono", monospace; font-size: 58px; font-weight: 700; }
+
+  .outro { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; background: var(--crude); animation: fadeIn .6s ease 12.0s both; }
+  .outro .t { font-size: 150px; font-weight: 700; letter-spacing: -.04em; animation: pop .8s cubic-bezier(.2,.7,.2,1) 12.2s both; }
+  .outro .s { font-size: 50px; font-weight: 600; animation: fadeUp .7s cubic-bezier(.2,.7,.2,1) 12.7s both; }
+  .outro .pill { font-family: "JetBrains Mono", monospace; font-size: 26px; letter-spacing: .18em; padding: 16px 30px; border: 2px solid rgb(245 184 61 / .4); background: rgb(245 184 61 / .08); color: var(--gold); border-radius: 999px; animation: fadeIn .6s ease 13.1s both; }
+  .brandbar { z-index: 2; animation: fadeIn .6s ease 3.8s both; }
+</style></head>
+<body><div class="stage">
+  <div class="grid"></div>
+
+  <div class="intro">
+    <p class="label" style="animation: fadeIn .6s ease .1s both; margin-bottom: 36px;">$OILHOOD · what we're building</p>
+    <h1>
+      <span class="l" style="animation-delay:.3s">Not just</span>
+      <span class="l" style="animation-delay:.5s">another <span class="strike">meme.</span></span>
+      <span class="l gold" style="animation-delay:1.9s">A terminal you'll</span>
+      <span class="l gold" style="animation-delay:2.1s">actually open.</span>
+    </h1>
+  </div>
+
+  <div class="term panel">
+    <div class="term-head">
+      <span class="label" style="color:var(--sand)"><span class="dot"></span>OilHood Terminal</span>
+      <span class="label">WTI / bbl</span>
+    </div>
+    <div style="display:flex; align-items:flex-end; justify-content:space-between;">
+      <div class="price gold" id="price">$0.00</div>
+      <div class="chg" style="animation: fadeIn .5s ease 5.4s both; margin-bottom: 26px;">▲ LIVE</div>
+    </div>
+    <svg class="chart" viewBox="0 0 960 190" preserveAspectRatio="none">
+      <defs><linearGradient id="f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3ddc97" stop-opacity=".3"/><stop offset="1" stop-color="#3ddc97" stop-opacity="0"/></linearGradient></defs>
+      <path class="fill" id="fill" fill="url(#f)"/>
+      <path class="line" id="line" fill="none" stroke="#3ddc97" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <div class="feats">
+    <div class="list">
+      <div class="feat" style="animation-delay:5.9s"><span class="ic">◉</span><div>Live WTI, Brent &amp; gas<small>The oil market on one screen</small></div></div>
+      <div class="feat" style="animation-delay:6.6s"><span class="ic">◆</span><div>Tokenized USO + XOM<small>Next to $OILHOOD on Robinhood Chain</small></div></div>
+      <div class="feat" style="animation-delay:7.3s"><span class="ic">🛢</span><div>Your bag in virtual barrels<small>$OILHOOD value ÷ WTI price</small></div></div>
+      <div class="feat" style="animation-delay:8.0s"><span class="ic">🔥</span><div>Public fee &amp; burn tracker<small>Read straight from the chain</small></div></div>
+    </div>
+    <div class="barrel">
+      <svg viewBox="0 0 120 170" width="170" height="240">
+        <defs>
+          <clipPath id="bc"><path d="M14 8h92c8 26 8 128 0 154H14C6 136 6 34 14 8Z"/></clipPath>
+          <linearGradient id="crude" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2a1b0b"/><stop offset=".5" stop-color="#5a3a14"/><stop offset="1" stop-color="#2a1b0b"/></linearGradient>
+        </defs>
+        <g clip-path="url(#bc)"><rect width="120" height="170" fill="#0e0e13"/><rect id="oil" y="170" width="120" height="170" fill="url(#crude)"/><rect id="sheen" y="170" width="120" height="3" fill="#f5b83d"/></g>
+        <path d="M14 8h92c8 26 8 128 0 154H14C6 136 6 34 14 8Z" fill="none" stroke="#f5b83d" stroke-width="3"/>
+        <path d="M9 48h102M9 122h102" stroke="#f5b83d" stroke-opacity=".5" stroke-width="2.5"/>
+      </svg>
+      <div class="bb gold" id="bbl">0.0</div>
+      <div class="label" style="font-size:18px">virtual barrels</div>
+    </div>
+  </div>
+
+  <div class="outro">
+    <img src="drop.svg" width="130" style="animation: pop .7s cubic-bezier(.2,.7,.2,1) 12.1s both">
+    <div class="t gold">$OILHOOD</div>
+    <div class="s">The oil of the people.</div>
+    <div class="pill">BUILDING ON ROBINHOOD CHAIN</div>
+  </div>
+
+  <div class="brandbar"><span class="name"><img src="drop.svg" width="40"><span>Oil<span class="gold">Hood</span></span></span><span class="label">Robinhood Chain · 4663</span></div>
+</div>
+<script src="timeline.js"></script>
+<script>
+  // Chart path: gentle uptrend with noise (illustrative preview, not a quote).
+  const pts = Array.from({ length: 60 }, (_, i) => {
+    const y = 150 - i * 1.6 - 18 * Math.sin(i / 4) - 9 * Math.sin(i / 1.6);
+    return [i * (960 / 59), Math.max(12, Math.min(180, y))];
+  });
+  const d = pts.map(([x, y], i) => (i ? "L" : "M") + x.toFixed(1) + "," + y.toFixed(1)).join(" ");
+  document.getElementById("line").setAttribute("d", d);
+  document.getElementById("fill").setAttribute("d", d + " L960,190 L0,190 Z");
+
+  const price = document.getElementById("price"), bbl = document.getElementById("bbl");
+  const oil = document.getElementById("oil"), sheen = document.getElementById("sheen");
+  onFrame((t) => {
+    price.textContent = "$" + (98.4 + 4.55 * prog(t, 4.0, 2.3)).toFixed(2);
+    const b = 24.6 * prog(t, 7.8, 2.6);
+    bbl.textContent = b.toFixed(1);
+    const y = 170 - 120 * prog(t, 7.8, 2.6);
+    oil.setAttribute("y", y); sheen.setAttribute("y", y);
+  });
+  seek(0);
+</script>
+</body></html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+  .head { position: absolute; left: 80px; right: 80px; top: 110px; }
+  .head h1 { font-size: 96px; line-height: 1.02; letter-spacing: -.035em; font-weight: 700; }
+  .head .l { display: block; animation: fadeUp .8s cubic-bezier(.2,.7,.2,1) both; }
+  .browser { position: absolute; left: 70px; right: 70px; top: 440px; overflow: hidden; animation: slideIn .9s cubic-bezier(.2,.7,.2,1) 1.4s both; }
+  @keyframes slideIn { from { opacity: 0; transform: translateY(160px) scale(.95); } to { opacity: 1; transform: none; } }
+  .bar { display: flex; align-items: center; gap: 18px; padding: 26px 30px; border-bottom: 1.5px solid var(--pipe); }
+  .bar i { width: 16px; height: 16px; border-radius: 50%; background: var(--pipe); display: inline-block; }
+  .url { flex: 1; display: flex; align-items: center; gap: 14px; background: var(--crude); border: 1.5px solid var(--pipe); border-radius: 999px; padding: 16px 26px; font-family: "JetBrains Mono", monospace; font-size: 30px; }
+  .url .typed { display: inline-block; overflow: hidden; white-space: nowrap; width: 0; animation: type 1.2s steps(18) 2.4s both; }
+  @keyframes type { to { width: 18ch; } }
+  .lock { color: var(--up); font-size: 24px; }
+  .caret { display: inline-block; width: 3px; height: 34px; background: var(--gold); animation: blink .7s linear 2.2s 4 both; }
+  .site { position: relative; padding: 40px 44px; animation: fadeIn .5s ease 3.9s both; }
+  .site .pill { display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 20px; color: var(--gold); border: 1.5px solid rgb(245 184 61 / .35); border-radius: 999px; padding: 8px 18px; }
+  .site h2 { font-size: 78px; letter-spacing: -.035em; line-height: 1; margin-top: 24px; animation: fadeUp .7s cubic-bezier(.2,.7,.2,1) 4.1s both; }
+  .site .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
+  .card { border: 1.5px solid var(--pipe); background: var(--rig); border-radius: 22px; padding: 22px; animation: fadeUp .6s cubic-bezier(.2,.7,.2,1) both; }
+  .card .k { font-family: "JetBrains Mono", monospace; font-size: 18px; letter-spacing: .18em; color: var(--smoke); }
+  .card .v { font-family: "JetBrains Mono", monospace; font-size: 34px; font-weight: 700; margin-top: 10px; }
+  .card svg { width: 100%; height: 60px; margin-top: 10px; }
+  .cta { display: flex; gap: 16px; margin-top: 30px; animation: fadeUp .6s cubic-bezier(.2,.7,.2,1) 5.3s both; }
+  .btn { padding: 20px 30px; border-radius: 18px; font-weight: 700; font-size: 26px; }
+  .btn.g { color: var(--crude); background: linear-gradient(180deg, #ffd27a, #f5b83d 55%, #e0961e); }
+  .btn.o { border: 1.5px solid var(--pipe); background: var(--rig); }
+  .tap { position: absolute; width: 70px; height: 70px; border-radius: 50%; border: 4px solid var(--gold); left: 150px; top: 600px; animation: tap .8s ease-out 6.0s both; }
+  @keyframes tap { 0% { opacity: 0; transform: scale(.3); } 30% { opacity: 1; } 100% { opacity: 0; transform: scale(1.6); } }
+
+  .outro { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 34px; background: var(--crude); animation: fadeIn .6s ease 7.0s both; z-index: 3; }
+  .outro .u { font-family: "JetBrains Mono", monospace; font-size: 76px; font-weight: 700; animation: pop .8s cubic-bezier(.2,.7,.2,1) 7.3s both; }
+  .outro .s { font-size: 44px; font-weight: 600; text-align: center; line-height: 1.25; animation: fadeUp .7s cubic-bezier(.2,.7,.2,1) 7.9s both; }
+  .brandbar { z-index: 4; }
+</style></head>
+<body><div class="stage">
+  <div class="grid"></div>
+  <div class="head">
+    <p class="label l" style="animation-delay:.1s; margin-bottom: 30px;">$OILHOOD · update</p>
+    <h1>
+      <span class="l" style="animation-delay:.3s">The OilHood Terminal</span>
+      <span class="l gold" style="animation-delay:.6s">is live.</span>
+    </h1>
+  </div>
+
+  <div class="browser panel">
+    <div class="bar"><i></i><i></i><i></i>
+      <div class="url"><span class="lock">🔒</span><span class="typed" id="url">oilhood.vercel.app</span><span class="caret"></span></div>
+    </div>
+    <div class="site">
+      <span class="pill">Robinhood Chain · ID 4663</span>
+      <h2>The oil of <span class="gold">the people.</span></h2>
+      <div class="row">
+        <div class="card" style="animation-delay:4.5s"><div class="k">WTI</div><div class="v gold">LIVE</div><svg viewBox="0 0 100 30" preserveAspectRatio="none"><path d="M0,24 L12,20 L24,22 L36,14 L48,16 L60,10 L72,12 L84,5 L100,7" fill="none" stroke="#3ddc97" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg></div>
+        <div class="card" style="animation-delay:4.7s"><div class="k">USO · XOM</div><div class="v">TOKENIZED</div><svg viewBox="0 0 100 30" preserveAspectRatio="none"><path d="M0,18 L14,16 L28,20 L42,12 L56,14 L70,9 L84,11 L100,6" fill="none" stroke="#3ddc97" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg></div>
+        <div class="card" style="animation-delay:4.9s"><div class="k">YOUR BAG</div><div class="v gold">🛢 BBL</div><svg viewBox="0 0 100 30" preserveAspectRatio="none"><path d="M0,26 L20,22 L40,18 L60,13 L80,9 L100,4" fill="none" stroke="#f5b83d" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg></div>
+      </div>
+      <div class="cta"><span class="btn g">🛢 Open Terminal</span><span class="btn o">Connect wallet</span></div>
+    </div>
+    <div class="tap"></div>
+  </div>
+
+  <div class="outro">
+    <img src="drop.svg" width="120" style="animation: pop .7s cubic-bezier(.2,.7,.2,1) 7.2s both">
+    <div class="u gold" id="url2">oilhood.vercel.app</div>
+    <div class="s">Check oil. Check your bag.<br>Every day.</div>
+  </div>
+
+  <div class="brandbar"><span class="name"><img src="drop.svg" width="40"><span>Oil<span class="gold">Hood</span></span></span><span class="label">Robinhood Chain · 4663</span></div>
+</div>
+<script src="timeline.js"></script>
+<script>
+  // Change the URL here if you move to a custom domain, then re-render.
+  const URL_TEXT = new URLSearchParams(location.search).get("url") || "oilhood.vercel.app";
+  document.getElementById("url").textContent = URL_TEXT;
+  document.getElementById("url2").textContent = URL_TEXT;
+  document.styleSheets[1].insertRule(`@keyframes type { to { width: ${URL_TEXT.length}ch; } }`);
+</script>
+</body></html>
