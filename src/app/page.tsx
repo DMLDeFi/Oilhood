@@ -7,12 +7,12 @@ import { LaunchCountdown } from "@/components/LaunchCountdown";
 import { robinhood } from "@/lib/wagmi";
 
 const FEATURES = [
-  { icon: "📈", title: "Live oil terminal", body: "WTI, Brent, nat gas and gasoline next to tokenized USO and XOM — the oil complex on one screen." },
+  { icon: "📈", title: "Live oil terminal", body: "WTI, Brent, nat gas and gasoline next to tokenized USO and XOM, plus a live on-chain $OILHOOD chart and trade feed." },
   { icon: "🛢", title: "Virtual Barrels", body: "Connect a wallet and see your $OILHOOD bag converted into barrels of crude at today's price." },
   { icon: "👛", title: "One portfolio", body: "$OILHOOD plus your tokenized energy stocks on Robinhood Chain, valued live. Read-only, nothing to sign." },
   { icon: "🔔", title: "Alerts & energy wire", body: "Set price alerts on crude or $OILHOOD and follow the latest energy headlines without leaving the page." },
   { icon: "🔥", title: "Fee & burn tracker", body: "Supply, burns and the creator fee wallet read straight from the chain, plus a public log of every fee spent." },
-  { icon: "⚙️", title: "Virtual Rigs (soon)", body: "Hold $OILHOOD to activate a rig that earns points as oil moves. Phase 3 of the roadmap." },
+  { icon: "⚙️", title: "Virtual Rigs", body: "Hold $OILHOOD and your wallet runs a rig that earns points every hour. Hold longer, earn more. Gusher hours when oil rises." },
 ];
 
 const STEPS = [

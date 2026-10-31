@@ -15,6 +15,9 @@ Marketing site + live **OilHood Terminal** for the $OILHOOD token on Robinhood C
   - **Fee & burn tracker**: total/burned/circulating supply read from chain + creator-fee wallet + public fee log
 - Scrolling price ticker, contract-address copy button, Buy on Pons buttons, OG share image, sitemap, robots.
 
+- `/rigs` – **Virtual Rigs**: every holder runs a rig that earns points hourly (tiers, steady-hands multiplier, gusher hours), leaderboard, rig naming by wallet signature.
+- **On-chain indexer**: every $OILHOOD transfer on Robinhood Chain goes into Postgres. That powers the live candlestick chart, buy/sell feed with whale alerts, holder count, top holders and 24h stats on the Terminal.
+
 Stack: Next.js 16 (App Router) · TypeScript · Tailwind CSS 4 · wagmi 2 + viem (uses viem's built-in `robinhood` chain) · TanStack Query.
 
 ## Run locally
@@ -38,6 +41,31 @@ npm run dev                  # http://localhost:3000
    - Optional `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID` for mobile wallets (free at cloud.reown.com).
 3. Edit `src/config/site.ts` for tokenomics, roadmap, FAQ, and add an entry to `feeLog` every time you spend/burn creator fees.
 4. Deploy on Vercel: click the button above (or import the repo at vercel.com/new) and deploy. Env var changes need a redeploy.
+
+## On-chain backend
+
+```
+Robinhood Chain RPC ──getLogs(Transfer)──▶ indexer ──▶ Postgres ◀── API routes ◀── Terminal / Rigs UI
+DexScreener + oil feeds ──▶ price snapshots ─┘           ▲
+GitHub Actions (every 5 min) / Vercel Cron / page traffic ──▶ /api/sync
+```
+
+- `src/server/indexer.ts` reads `Transfer` events in adaptive block chunks and labels each one buy / sell / transfer / burn based on the pool addresses. It keeps a balance ledger, and every write is idempotent.
+- `src/server/prices.ts` stores a $OILHOOD + WTI price snapshot each sync and auto-detects pools from DexScreener.
+- `src/server/rigs.ts` scores each completed hour exactly once. Balances are rebuilt from the transfer log as of the end of the hour, so late syncs never change results and sniping the snapshot doesn't work. Rules live in `src/lib/rigs.ts`.
+- `src/server/sync.ts` runs it all under a lease, so cron and visitor-triggered syncs never overlap.
+- Tables are created automatically on first run.
+
+### Turning it on (launch day)
+
+1. **Database:** Vercel → your project → Storage → Create Database → **Neon** (free tier) → connect to the project. This sets `DATABASE_URL`.
+2. **Env vars** in Vercel:
+   - `NEXT_PUBLIC_OILHOOD_ADDRESS`: the contract address.
+   - `OILHOOD_START_BLOCK`: the block the contract was created in (shown on the explorer's contract page).
+   - `CRON_SECRET`: any long random string.
+   - `OILHOOD_POOLS` (optional): the Pons pool or curve address, if trades don't show as buys/sells.
+3. **Scheduler:** GitHub repo → Settings → Secrets and variables → Actions. Add secret `CRON_SECRET` (same value) and variable `SITE_URL` (your site URL). `.github/workflows/sync.yml` then syncs every 5 minutes. Vercel Cron runs a daily backup sync, and page visits also trigger syncs.
+4. Redeploy. Check `GET /api/sync` with header `Authorization: Bearer <CRON_SECRET>`; it returns what was indexed and scored.
 
 ## Data sources
 

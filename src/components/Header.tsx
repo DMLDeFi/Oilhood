@@ -9,6 +9,7 @@ import { BuyButton } from "./BuyButton";
 
 const NAV = [
   { href: "/terminal", label: "Terminal" },
+  { href: "/rigs", label: "Rigs" },
   { href: "/#tokenomics", label: "Tokenomics" },
   { href: "/#buy", label: "How to buy" },
   { href: "/#roadmap", label: "Roadmap" },

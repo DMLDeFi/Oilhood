@@ -15,6 +15,7 @@ import { NewsFeed } from "./NewsFeed";
 import { FeeTracker } from "./FeeTracker";
 import { CopyAddress } from "./CopyAddress";
 import { BuyButton } from "./BuyButton";
+import { LiveToken } from "./LiveToken";
 
 export function TerminalDashboard() {
   const { data: market, dataUpdatedAt } = useMarket();
@@ -73,6 +74,8 @@ export function TerminalDashboard() {
           <BuyButton className="w-full" />
         </div>
       </section>
+
+      <LiveToken />
 
       <BarrelsCalculator wti={wti?.price} oilhoodPrice={tok?.oilhood?.priceUsd ?? null} />
 

@@ -56,19 +56,19 @@ export const roadmap = [
     phase: "Phase 1",
     title: "Strike oil",
     status: "live" as const,
-    items: ["Launch $OILHOOD on Pons", "OilHood Terminal: live WTI, Brent, USO, XOM", "Virtual Barrels calculator"],
+    items: ["OilHood Terminal: live WTI, Brent, USO, XOM", "Virtual Barrels calculator", "Wallet portfolio, alerts, energy news"],
   },
   {
     phase: "Phase 2",
-    title: "Build the refinery",
+    title: "Drill",
     status: "next" as const,
-    items: ["Wallet portfolio (OILHOOD + tokenized USO/XOM)", "Price alerts and energy news", "Creator fee and burn tracker"],
+    items: ["Launch $OILHOOD on Pons", "On-chain indexer: live chart, trade feed, holders", "Virtual Rigs season 1 + leaderboard"],
   },
   {
     phase: "Phase 3",
-    title: "Virtual Rigs",
+    title: "Refine",
     status: "later" as const,
-    items: ["Hold or stake $OILHOOD to activate a rig", "Rigs produce points based on real oil moves", "Leaderboard of top drillers"],
+    items: ["Rig seasons and upgrades", "Daily oil call game", "Telegram bot with buy alerts"],
   },
 ];
 
@@ -80,6 +80,10 @@ export const faq = [
   {
     q: "Is OilHood backed by oil or affiliated with Robinhood?",
     a: "No. $OILHOOD is a community memecoin on Robinhood Chain. It is not backed by oil, not a security, and not affiliated with or endorsed by Robinhood Markets, Inc.",
+  },
+  {
+    q: "What are Virtual Rigs?",
+    a: "Every wallet holding $OILHOOD runs a rig that earns points each hour based on bag size, how long you've held without selling, and whether oil rose that hour. Points are a scoreboard only, with no monetary value. Your tokens never leave your wallet.",
   },
   {
     q: "Where does the oil data come from?",
