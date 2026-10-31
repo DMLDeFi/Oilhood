@@ -44,12 +44,36 @@ export default function Home() {
             <div className="flex flex-wrap gap-3">
               <BuyButton />
               <Link href="/terminal" className="btn-ghost">Open Terminal</Link>
+              <Link href="/rigs" className="btn-ghost">⚙️ Virtual Rigs</Link>
             </div>
             <LaunchCountdown />
             <div className="max-w-xl"><CopyAddress /></div>
           </div>
           <HeroLive />
         </div>
+      </section>
+
+      {/* NEW TECH */}
+      <section className="mx-auto grid max-w-7xl gap-4 px-4 pb-16 sm:px-6 md:grid-cols-2">
+        <Link href="/rigs" className="panel panel-hover group relative overflow-hidden p-7">
+          <div className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full bg-gold/10 blur-3xl" />
+          <span className="rounded-full bg-gold/15 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-gold">New · Season 1</span>
+          <h2 className="mt-4 text-2xl font-bold">Virtual Rigs ⚙️</h2>
+          <p className="mt-2 text-sm leading-relaxed text-smoke">
+            Hold $OILHOOD and your wallet runs a rig that earns points every hour. Hold longer for up to 2x, and every rig gushes
+            when real oil rises. Nothing staked, nothing locked.
+          </p>
+          <p className="mt-4 font-semibold text-gold group-hover:underline">See the tiers and leaderboard →</p>
+        </Link>
+        <Link href="/terminal" className="panel panel-hover group relative overflow-hidden p-7">
+          <span className="rounded-full bg-up/15 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-up">New · On-chain</span>
+          <h2 className="mt-4 text-2xl font-bold">Live $OILHOOD data 📊</h2>
+          <p className="mt-2 text-sm leading-relaxed text-smoke">
+            Our own indexer reads every $OILHOOD trade straight from Robinhood Chain: candlestick chart, live buy/sell feed with
+            whale alerts, holders and 24h stats. Goes live at launch.
+          </p>
+          <p className="mt-4 font-semibold text-gold group-hover:underline">Open the Terminal →</p>
+        </Link>
       </section>
 
       {/* NARRATIVE */}

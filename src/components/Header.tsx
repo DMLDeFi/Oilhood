@@ -35,6 +35,7 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
+          <Link href="/rigs" className="rounded-lg px-2 py-2 text-sm text-gold md:hidden">Rigs</Link>
           <ConnectButton className="!px-3 !py-2 text-sm" />
           <BuyButton className="hidden !px-4 !py-2 text-sm sm:inline-flex" label="Buy" />
           <button className="rounded-lg p-2 text-smoke md:hidden" aria-label="Menu" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
