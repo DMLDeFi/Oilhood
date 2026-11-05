@@ -23,7 +23,8 @@ export const tokens = {
   xom: addr(process.env.NEXT_PUBLIC_XOM_TOKEN_ADDRESS),
 };
 
-const launch = process.env.NEXT_PUBLIC_LAUNCH_DATE ? new Date(process.env.NEXT_PUBLIC_LAUNCH_DATE) : null;
+// Saturday 7 Nov 2026, 12:00 WAT (Nigeria) = 11:00 UTC = 6:00 AM ET. Override with NEXT_PUBLIC_LAUNCH_DATE.
+const launch = new Date(process.env.NEXT_PUBLIC_LAUNCH_DATE || "2026-11-07T11:00:00Z");
 /** Pre-launch countdown target (ISO date with timezone, e.g. 2026-11-05T18:00:00Z). */
 export const launchDate = launch && !isNaN(launch.getTime()) ? launch : null;
 

@@ -1,0 +1,77 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+  .center { position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .scene1 { animation: fadeOutUp .5s ease-in 5.0s both; }
+  .head { top: 120px; }
+  .head h1 { font-size: 72px; letter-spacing: -.03em; font-weight: 700; animation: fadeUp .8s cubic-bezier(.2,.7,.2,1) .5s both; }
+  .cal { position: absolute; left: 50%; top: 280px; width: 480px; margin-left: -240px; border-radius: 44px; overflow: hidden;
+    border: 2px solid rgb(245 184 61 / .5); background: var(--well); box-shadow: 0 50px 140px -40px rgb(245 184 61 / .35);
+    transform-origin: top center; animation: flip 1s cubic-bezier(.2,.7,.2,1) 1.1s both; }
+  @keyframes flip { from { opacity: 0; transform: perspective(1200px) rotateX(-75deg); } to { opacity: 1; transform: none; } }
+  .cal .bar { background: linear-gradient(180deg, #ffd27a, #f5b83d 55%, #e0961e); color: var(--crude); font-family: "JetBrains Mono", monospace; font-weight: 700; font-size: 44px; letter-spacing: .3em; padding: 26px 0 22px; text-align: center; }
+  .cal .day { font-size: 250px; font-weight: 700; line-height: 1; text-align: center; padding: 26px 0 6px; letter-spacing: -.04em; }
+  .cal .dow { font-family: "JetBrains Mono", monospace; font-size: 40px; letter-spacing: .3em; color: var(--smoke); text-align: center; padding-bottom: 40px; }
+  .times { top: 860px; flex-direction: row; justify-content: center; gap: 22px; }
+  .chip { font-family: "JetBrains Mono", monospace; font-size: 34px; padding: 18px 28px; border-radius: 20px; border: 1.5px solid var(--pipe); background: var(--well); animation: pop .6s cubic-bezier(.2,.7,.2,1) both; }
+  .chip b { color: var(--gold); }
+  .chip small { display: block; font-size: 20px; color: var(--smoke); letter-spacing: .15em; margin-top: 4px; }
+  .where { top: 1040px; font-size: 38px; font-weight: 600; animation: fadeUp .7s cubic-bezier(.2,.7,.2,1) 3.9s both; }
+
+  .scene2 { position: absolute; left: 90px; right: 90px; top: 300px; animation: fadeIn .5s ease 5.3s both; }
+  .scene2 > .inner { animation: fadeOutUp .5s ease-in 8.4s both; }
+  .scene2 .label { margin-bottom: 30px; }
+  .scene2 h2 { font-size: 80px; letter-spacing: -.035em; line-height: 1.02; margin-bottom: 50px; }
+  .item { display: flex; align-items: center; gap: 26px; padding: 28px 32px; border-radius: 28px; border: 1.5px solid var(--pipe); background: var(--well); font-size: 38px; font-weight: 600; margin-bottom: 18px; animation: itemIn .55s cubic-bezier(.2,.7,.2,1) both; }
+  .item .ck { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: rgb(61 220 151 / .15); color: var(--up); font-size: 32px; flex: none; animation: pop .4s cubic-bezier(.2,.7,.2,1) both; }
+  @keyframes itemIn { from { opacity: 0; transform: translateX(-70px); } to { opacity: 1; transform: none; } }
+
+  .outro { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; background: var(--crude); animation: fadeIn .6s ease 8.7s both; z-index: 3; }
+  .outro .t { font-size: 150px; font-weight: 700; letter-spacing: -.04em; animation: pop .8s cubic-bezier(.2,.7,.2,1) 8.9s both; }
+  .outro .d { font-family: "JetBrains Mono", monospace; font-size: 46px; font-weight: 700; animation: fadeUp .7s cubic-bezier(.2,.7,.2,1) 9.4s both; }
+  .outro .u { font-family: "JetBrains Mono", monospace; font-size: 36px; color: var(--smoke); animation: fadeUp .7s cubic-bezier(.2,.7,.2,1) 9.8s both; }
+  .outro .pill { font-family: "JetBrains Mono", monospace; font-size: 24px; letter-spacing: .14em; padding: 16px 28px; border: 2px solid rgb(245 184 61 / .4); background: rgb(245 184 61 / .08); color: var(--gold); border-radius: 999px; animation: fadeIn .6s ease 10.3s both; }
+  .brandbar { z-index: 4; animation: fadeIn .6s ease .2s both; }
+</style></head>
+<body><div class="stage">
+  <div class="grid"></div>
+
+  <div class="scene1">
+    <div class="center head">
+      <p class="label" style="animation: fadeIn .6s ease .2s both; margin-bottom: 24px">$OILHOOD · launch date</p>
+      <h1>Mark your calendar.</h1>
+    </div>
+    <div class="cal">
+      <div class="bar">NOV</div>
+      <div class="day gold">7</div>
+      <div class="dow">SATURDAY</div>
+    </div>
+    <div class="center times">
+      <div class="chip" style="animation-delay:2.3s"><b>12:00</b> WAT<small>NIGERIA</small></div>
+      <div class="chip" style="animation-delay:2.65s"><b>11:00</b> UTC<small>WORLD</small></div>
+      <div class="chip" style="animation-delay:3.0s"><b>6:00 AM</b> ET<small>NEW YORK</small></div>
+    </div>
+    <div class="center where"><span>Launching on <span class="gold">Pons</span> · Robinhood Chain</span></div>
+  </div>
+
+  <div class="scene2"><div class="inner">
+    <p class="label">Live the minute we launch</p>
+    <h2>Not just a token.<br><span class="gold">A whole terminal.</span></h2>
+    <div class="item" style="animation-delay:5.7s"><span class="ck" style="animation-delay:5.9s">✓</span>Live chart &amp; trade feed</div>
+    <div class="item" style="animation-delay:6.25s"><span class="ck" style="animation-delay:6.45s">✓</span>Virtual Rigs season 1</div>
+    <div class="item" style="animation-delay:6.8s"><span class="ck" style="animation-delay:7.0s">✓</span>Holders &amp; whale alerts</div>
+    <div class="item" style="animation-delay:7.35s"><span class="ck" style="animation-delay:7.55s">✓</span>Public fee &amp; burn tracker</div>
+  </div></div>
+
+  <div class="outro">
+    <img src="drop.svg" width="120" style="animation: pop .7s cubic-bezier(.2,.7,.2,1) 8.8s both">
+    <div class="t gold">$OILHOOD</div>
+    <div class="d">SAT 7 NOV · 12:00 WAT</div>
+    <div class="u">oilhood.vercel.app</div>
+    <div class="pill">CA ONLY FROM THIS ACCOUNT</div>
+  </div>
+
+  <div class="brandbar"><span class="name"><img src="drop.svg" width="40"><span>Oil<span class="gold">Hood</span></span></span><span class="label">Robinhood Chain · 4663</span></div>
+</div>
+<script src="timeline.js"></script>
+</body></html>

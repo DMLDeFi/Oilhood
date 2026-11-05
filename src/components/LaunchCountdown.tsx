@@ -41,6 +41,14 @@ export function LaunchCountdown() {
           );
         })}
       </div>
+      <p className="mt-2 font-mono text-xs text-smoke">
+        {[
+          launchDate.toLocaleString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "Africa/Lagos" }),
+          `${launchDate.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Lagos" })} WAT`,
+          `${launchDate.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "UTC" })} UTC`,
+          `your time ${launchDate.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`,
+        ].join(" · ")}
+      </p>
     </div>
   );
 }
