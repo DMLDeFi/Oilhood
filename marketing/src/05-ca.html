@@ -1,0 +1,84 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+  .center { position: absolute; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .flash { position: absolute; inset: 0; background: radial-gradient(45% 35% at 50% 30%, rgb(245 184 61 / .6), transparent 70%); animation: flashA 1.6s ease-out .55s both; }
+  @keyframes flashA { 0% { opacity: 0; } 20% { opacity: 1; } 100% { opacity: .25; } }
+  .live { top: 190px; }
+  .live .t { font-size: 190px; font-weight: 700; letter-spacing: -.05em; line-height: .95; animation: slam .7s cubic-bezier(.2,.7,.2,1) .5s both; }
+  @keyframes slam { 0% { opacity: 0; transform: scale(1.8); filter: blur(12px); } 60% { opacity: 1; transform: scale(.96); filter: none; } 100% { transform: scale(1); } }
+  .live .s { font-size: 52px; font-weight: 600; margin-top: 26px; animation: fadeUp .7s cubic-bezier(.2,.7,.2,1) 1.4s both; }
+  .scene1 { animation: fadeOutUp .5s ease-in 6.6s both; }
+  .ca { position: absolute; left: 70px; right: 70px; top: 610px; padding: 40px 44px; border-radius: 36px; border: 2px solid rgb(245 184 61 / .55); background: var(--well);
+    box-shadow: 0 40px 120px -40px rgb(245 184 61 / .35); animation: fadeUp .6s cubic-bezier(.2,.7,.2,1) 2.2s both; }
+  .ca .label { margin-bottom: 22px; }
+  .ca .line { font-family: "JetBrains Mono", monospace; font-size: 54px; font-weight: 700; white-space: nowrap; overflow: hidden; width: 0; color: var(--sand); }
+  .ca .l1 { animation: type1 .8s steps(21) 2.6s both; }
+  .ca .l2 { animation: type2 .8s steps(21) 3.4s both; color: var(--gold); }
+  @keyframes type1 { to { width: 21ch; } }
+  @keyframes type2 { to { width: 21ch; } }
+  .chips { top: 1000px; flex-direction: row; justify-content: center; gap: 18px; }
+  .chip { font-family: "JetBrains Mono", monospace; font-size: 26px; padding: 16px 24px; border-radius: 18px; border: 1.5px solid var(--pipe); background: var(--well); animation: pop .5s cubic-bezier(.2,.7,.2,1) both; }
+  .chip b { color: var(--up); }
+
+  .scene2 { position: absolute; left: 90px; right: 90px; top: 300px; animation: fadeIn .5s ease 6.9s both; }
+  .scene2 > .inner { animation: fadeOutUp .5s ease-in 9.2s both; }
+  .scene2 h2 { font-size: 84px; letter-spacing: -.035em; line-height: 1.02; margin: 26px 0 46px; }
+  .item { display: flex; align-items: center; gap: 26px; padding: 28px 32px; border-radius: 28px; border: 1.5px solid var(--pipe); background: var(--well); font-size: 38px; font-weight: 600; margin-bottom: 18px; animation: itemIn .55s cubic-bezier(.2,.7,.2,1) both; }
+  .item .dot { width: 18px; height: 18px; border-radius: 50%; background: var(--up); box-shadow: 0 0 0 8px rgb(61 220 151 / .15); flex: none; margin: 0 8px; }
+  @keyframes itemIn { from { opacity: 0; transform: translateX(-70px); } to { opacity: 1; transform: none; } }
+
+  .outro { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; background: var(--crude); animation: fadeIn .6s ease 9.5s both; z-index: 3; }
+  .outro .t { font-size: 150px; font-weight: 700; letter-spacing: -.04em; animation: pop .8s cubic-bezier(.2,.7,.2,1) 9.7s both; }
+  .outro .c { font-family: "JetBrains Mono", monospace; font-size: 40px; padding: 18px 30px; border-radius: 20px; border: 2px solid rgb(245 184 61 / .45); background: var(--well); animation: fadeUp .7s cubic-bezier(.2,.7,.2,1) 10.1s both; }
+  .outro .b { font-size: 40px; font-weight: 700; padding: 22px 40px; border-radius: 22px; color: var(--crude); background: linear-gradient(180deg, #ffd27a, #f5b83d 55%, #e0961e); animation: fadeUp .7s cubic-bezier(.2,.7,.2,1) 10.5s both; }
+  .outro .u { font-family: "JetBrains Mono", monospace; font-size: 34px; color: var(--smoke); animation: fadeUp .7s cubic-bezier(.2,.7,.2,1) 10.8s both; }
+  .brandbar { z-index: 4; animation: fadeIn .6s ease .2s both; }
+</style></head>
+<body><div class="stage">
+  <div class="grid"></div>
+  <div class="flash"></div>
+
+  <div class="scene1">
+    <div class="center live">
+      <div class="t gold">IT'S LIVE.</div>
+      <div class="s">$OILHOOD is live on <span class="gold">Pons</span> 🛢</div>
+    </div>
+    <div class="ca">
+      <p class="label">Official contract address · Robinhood Chain</p>
+      <div class="line l1" id="l1"></div>
+      <div class="line l2" id="l2"></div>
+    </div>
+    <div class="center chips">
+      <div class="chip" style="animation-delay:4.5s"><b>✓</b> Only from this account</div>
+      <div class="chip" style="animation-delay:4.8s"><b>✓</b> Also on oilhood.vercel.app</div>
+    </div>
+  </div>
+
+  <div class="scene2"><div class="inner">
+    <p class="label">Live right now</p>
+    <h2>The Terminal<br><span class="gold">just switched on.</span></h2>
+    <div class="item" style="animation-delay:7.3s"><span class="dot"></span>Live chart &amp; trade feed</div>
+    <div class="item" style="animation-delay:7.8s"><span class="dot"></span>Virtual Rigs season 1</div>
+    <div class="item" style="animation-delay:8.3s"><span class="dot"></span>Your bag in virtual barrels</div>
+  </div></div>
+
+  <div class="outro">
+    <img src="drop.svg" width="120" style="animation: pop .7s cubic-bezier(.2,.7,.2,1) 9.6s both">
+    <div class="t gold">$OILHOOD</div>
+    <div class="c" id="short"></div>
+    <div class="b">🛢 Buy on Pons</div>
+    <div class="u">oilhood.vercel.app</div>
+  </div>
+
+  <div class="brandbar"><span class="name"><img src="drop.svg" width="40"><span>Oil<span class="gold">Hood</span></span></span><span class="label">Robinhood Chain · 4663</span></div>
+</div>
+<script src="timeline.js"></script>
+<script>
+  // Contract address comes from ?ca=0x... so the video can be re-rendered in seconds.
+  const ca = new URLSearchParams(location.search).get("ca") || "0x0000000000000000000000000000000000000000";
+  document.getElementById("l1").textContent = ca.slice(0, 21);
+  document.getElementById("l2").textContent = ca.slice(21);
+  document.getElementById("short").textContent = ca.slice(0, 8) + "…" + ca.slice(-6);
+</script>
+</body></html>

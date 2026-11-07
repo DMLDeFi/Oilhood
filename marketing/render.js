@@ -11,7 +11,7 @@ const out = path.join(__dirname, "videos", `${name}.mp4`);
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1080, height: 1350 } });
-  await page.goto("file://" + src);
+  await page.goto("file://" + src + (process.env.Q ? "?" + process.env.Q : ""));
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(500);
 

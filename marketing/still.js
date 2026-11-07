@@ -5,7 +5,7 @@ const [name, ...times] = process.argv.slice(2);
 (async () => {
   const b = await chromium.launch();
   const p = await b.newPage({ viewport: { width: 1080, height: 1350 } });
-  await p.goto("file://" + path.join(__dirname, "src", `${name}.html`));
+  await p.goto("file://" + path.join(__dirname, "src", `${name}.html`) + (process.env.Q ? "?" + process.env.Q : ""));
   await p.evaluate(() => document.fonts.ready);
   await p.waitForTimeout(500);
   for (const t of times) {
