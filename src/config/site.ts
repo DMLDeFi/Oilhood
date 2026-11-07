@@ -18,7 +18,8 @@ export const site = {
 };
 
 export const tokens = {
-  oilhood: addr(process.env.NEXT_PUBLIC_OILHOOD_ADDRESS),
+  // Official $OILHOOD contract (launched 7 Nov 2026). Env var overrides.
+  oilhood: addr(process.env.NEXT_PUBLIC_OILHOOD_ADDRESS || "0x3f8711716801480f5c45c77b2b0b3866b4432886"),
   uso: addr(process.env.NEXT_PUBLIC_USO_TOKEN_ADDRESS),
   xom: addr(process.env.NEXT_PUBLIC_XOM_TOKEN_ADDRESS),
 };

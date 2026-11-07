@@ -132,7 +132,7 @@ function Prelaunch({ reason }: { reason?: string }) {
   return (
     <section className="panel oil-sheen p-6 md:p-8">
       <p className="label">Live $OILHOOD · on-chain</p>
-      <h2 className="mt-2 text-2xl font-bold">Goes live the minute $OILHOOD launches.</h2>
+      <h2 className="mt-2 text-2xl font-bold">{reason === "no-database" ? "$OILHOOD is live. The on-chain feed is switching on." : "Goes live the minute $OILHOOD launches."}</h2>
       <p className="mt-2 max-w-2xl text-sm text-smoke">
         Every trade is read directly from Robinhood Chain and shown here: candlestick chart, live buy/sell feed with whale alerts,
         24h volume, holder count and top holders.
@@ -142,7 +142,7 @@ function Prelaunch({ reason }: { reason?: string }) {
           <div key={x} className="rounded-xl border border-dashed border-pipe px-3 py-4 text-center">{x}</div>
         ))}
       </div>
-      {reason === "no-database" && <p className="mt-4 text-xs text-amber">Admin: set DATABASE_URL to enable the indexer.</p>}
+
     </section>
   );
 }
